@@ -139,7 +139,7 @@ abstract class AbstractInstaller extends LibraryInstaller
         $this->updateUserfiles($package);
         $this->updateRootFiles($package);
 
-        $root        = $this->plugin->getContaoRoot($this->composer->getPackage()) . DIRECTORY_SEPARATOR;
+        $root        = $this->plugin->getContaoRoot($this->composer) . DIRECTORY_SEPARATOR;
         $installPath = self::unprefixPath($root, $this->getInstallPath($package));
         RunonceManager::addRunonces($package, $installPath);
     }
@@ -155,7 +155,7 @@ abstract class AbstractInstaller extends LibraryInstaller
         $this->updateUserfiles($target);
         $this->updateRootFiles($target);
 
-        $root        = $this->plugin->getContaoRoot($this->composer->getPackage()) . DIRECTORY_SEPARATOR;
+        $root        = $this->plugin->getContaoRoot($this->composer) . DIRECTORY_SEPARATOR;
         $installPath = self::unprefixPath($root, $this->getInstallPath($target));
         RunonceManager::addRunonces($target, $installPath);
     }
@@ -179,7 +179,7 @@ abstract class AbstractInstaller extends LibraryInstaller
         $this->updateUserfiles($package);
         $this->updateRootFiles($package);
 
-        $root        = $this->plugin->getContaoRoot($this->composer->getPackage()) . DIRECTORY_SEPARATOR;
+        $root        = $this->plugin->getContaoRoot($this->composer) . DIRECTORY_SEPARATOR;
         $installPath = self::unprefixPath($root, $this->getInstallPath($package));
         RunonceManager::addRunonces($package, $installPath);
     }
@@ -278,7 +278,7 @@ abstract class AbstractInstaller extends LibraryInstaller
 
         if (self::getNativePath($targetPath, '/') == 'system/runonce.php') {
             $path = self::unprefixPath(
-                $this->plugin->getContaoRoot($this->composer->getPackage()),
+                $this->plugin->getContaoRoot($this->composer),
                 $currentPath
             );
             RunonceManager::addRunonce($path);
@@ -312,7 +312,7 @@ abstract class AbstractInstaller extends LibraryInstaller
      */
     protected function mapSources(PackageInterface $package)
     {
-        $root    = $this->plugin->getContaoRoot($this->composer->getPackage());
+        $root    = $this->plugin->getContaoRoot($this->composer);
         $sources = $this->getSourcesSpec($package);
         $map     = array(
             'copies' => array(),
@@ -370,7 +370,7 @@ abstract class AbstractInstaller extends LibraryInstaller
     protected function removeSources(PackageInterface $package)
     {
         $map  = $this->mapSources($package);
-        $root = $this->plugin->getContaoRoot($this->composer->getPackage());
+        $root = $this->plugin->getContaoRoot($this->composer);
 
         $count = 0;
 
@@ -419,7 +419,7 @@ abstract class AbstractInstaller extends LibraryInstaller
     public function removeEmptyDirectories($pathname)
     {
         if (is_dir($pathname)) {
-            $root = $this->plugin->getContaoRoot($this->composer->getPackage());
+            $root = $this->plugin->getContaoRoot($this->composer);
 
             $contents = array_filter(
                 scandir($pathname),
@@ -457,7 +457,7 @@ abstract class AbstractInstaller extends LibraryInstaller
             $contao = $extra['contao'];
 
             if (is_array($contao) && array_key_exists('userfiles', $contao)) {
-                $root       = $this->plugin->getContaoRoot($this->composer->getPackage());
+                $root       = $this->plugin->getContaoRoot($this->composer);
                 $uploadPath = $this->getUploadPath();
 
                 $userfiles   = (array) $contao['userfiles'];
@@ -500,7 +500,7 @@ abstract class AbstractInstaller extends LibraryInstaller
             $contao = $extra['contao'];
 
             if (is_array($contao) && array_key_exists('files', $contao)) {
-                $root        = $this->plugin->getContaoRoot($this->composer->getPackage());
+                $root        = $this->plugin->getContaoRoot($this->composer);
                 $files       = (array) $contao['files'];
                 $installPath = $this->getInstallPath($package);
 
