@@ -13,7 +13,7 @@
     "require-dev": {
         "composer/composer": "~1.0@dev",
         "phpcq/all-tasks": "~1.0",
-        "contao/core": ">=2.11,<4.0"
+        "contao/core": ">=3.2,<5.0"
     },
     "replace": {
         "contao-community-alliance/composer-installer": "1.7.1"
