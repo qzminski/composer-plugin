@@ -92,12 +92,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $this->composer    = $composer;
         $this->inputOutput = $inputOutput;
 
-        try {
-            $factory = new ContaoEnvironmentFactory();
-            $this->environment = $factory->create($composer);
-        } catch (UnknownEnvironmentException $e) {
-            $this->environment = null;
-        }
+        $this->detectEnvironment();
 
         $installationManager = $composer->getInstallationManager();
 
@@ -173,7 +168,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function handlePostUpdateCmd()
     {
         // Does nothing if Contao is not yet installed
-        if (null === $this->environment) {
+        if (!$this->detectEnvironment()) {
             return;
         }
 
@@ -191,7 +186,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function handlePostAutoloadDump()
     {
         // Does nothing if Contao is not yet installed
-        if (null === $this->environment) {
+        if (!$this->detectEnvironment()) {
             return;
         }
 
@@ -387,6 +382,21 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 $prettyVersion
             );
             $package->setRequires($requires);
+        }
+    }
+
+    private function detectEnvironment()
+    {
+        try {
+            $factory = new ContaoEnvironmentFactory();
+            $this->environment = $factory->create($this->composer);
+
+            return true;
+
+        } catch (UnknownEnvironmentException $e) {
+            $this->environment = null;
+
+            return false;
         }
     }
 }
