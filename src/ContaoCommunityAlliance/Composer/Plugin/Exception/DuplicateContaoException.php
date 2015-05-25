@@ -12,7 +12,7 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin;
+namespace ContaoCommunityAlliance\Composer\Plugin\Exception;
 
 /**
  * Exception when composer try to install contao/core in vendor,
