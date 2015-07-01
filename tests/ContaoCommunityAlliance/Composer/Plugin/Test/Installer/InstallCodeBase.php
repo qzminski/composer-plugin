@@ -11,7 +11,7 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Installer;
 
 use Composer\Composer;
 use Composer\Config;
@@ -23,6 +23,7 @@ use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
 use ContaoCommunityAlliance\Composer\Plugin\Environment\Contao3Environment;
 use ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller;
+use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
 
 abstract class InstallCodeBase extends TestCase
 {

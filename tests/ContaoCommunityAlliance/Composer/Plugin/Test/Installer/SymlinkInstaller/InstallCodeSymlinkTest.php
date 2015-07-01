@@ -11,10 +11,10 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test\SymlinkInstaller;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Installer\SymlinkInstaller;
 
 use ContaoCommunityAlliance\Composer\Plugin\Installer\SymlinkInstaller;
-use ContaoCommunityAlliance\Composer\Plugin\Test\InstallCodeBase;
+use ContaoCommunityAlliance\Composer\Plugin\Test\Installer\InstallCodeBase;
 
 class InstallCodeSymlinkTest
     extends InstallCodeBase

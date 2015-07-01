@@ -11,11 +11,11 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test\CopyInstaller;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Installer\CopyInstaller;
 
 use Composer\Config;
 use ContaoCommunityAlliance\Composer\Plugin\Installer\CopyInstaller;
-use ContaoCommunityAlliance\Composer\Plugin\Test\InstallCodeBase;
+use ContaoCommunityAlliance\Composer\Plugin\Test\Installer\InstallCodeBase;
 
 class InstallCodeCopyTest
     extends InstallCodeBase

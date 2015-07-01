@@ -11,7 +11,7 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test\AbstractInstaller;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Installer\AbstractInstaller;
 
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
 use ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller;

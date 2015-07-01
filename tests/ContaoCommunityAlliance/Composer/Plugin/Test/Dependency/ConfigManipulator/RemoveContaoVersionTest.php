@@ -12,7 +12,7 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test\ConfigManipulator;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Dependency\ConfigManipulator;
 
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
 use ContaoCommunityAlliance\Composer\Plugin\Dependency\ConfigManipulator;
