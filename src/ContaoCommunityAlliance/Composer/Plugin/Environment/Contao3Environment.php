@@ -72,10 +72,22 @@ class Contao3Environment implements ContaoEnvironmentInterface
     public function getUploadPath()
     {
         if (null === $this->uploadPath) {
-            $this->uploadPath = $this->extractKeyFromConfigPath($this->rootDir . '/system/config/', 'uploadPath');
+            $this->uploadPath = $this->getConfigKey('uploadPath');
         }
 
         return $this->uploadPath;
+    }
+
+    /**
+     * Retrieve a config value from the config files.
+     *
+     * @param string $key The config key to retrieve.
+     *
+     * @return mixed
+     */
+    public function getConfigKey($key)
+    {
+        return $this->extractKeyFromConfigPath($this->rootDir . '/system/config/', $key);
     }
 
     /**
