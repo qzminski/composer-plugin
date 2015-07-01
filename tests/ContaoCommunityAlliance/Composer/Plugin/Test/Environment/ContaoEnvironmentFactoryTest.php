@@ -11,14 +11,15 @@
  * @license LGPL-3.0+
  */
 
-namespace ContaoCommunityAlliance\Composer\Plugin\Test\Plugin;
+namespace ContaoCommunityAlliance\Composer\Plugin\Test\Plugin\Environment;
 
 use Composer\Package\RootPackage;
 use Composer\Util\Filesystem;
-use ContaoCommunityAlliance\Composer\Plugin\Plugin;
+use ContaoCommunityAlliance\Composer\Plugin\Environment\ContaoEnvironmentFactory;
+use ContaoCommunityAlliance\Composer\Plugin\Environment\ContaoEnvironmentInterface;
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
 
-class GetContaoRootTest extends TestCase
+class ContaoEnvironmentFactoryTest extends TestCase
 {
     /**
      * Path to a temporary folder where to mimic an installation.
@@ -51,26 +52,11 @@ class GetContaoRootTest extends TestCase
     }
 
     /**
-     * Prepare the plugin.
-     *
-     * @return Plugin
-     */
-    protected function mockPlugin()
-    {
-        $plugin = $this->getMock(
-            '\ContaoCommunityAlliance\Composer\Plugin\Plugin',
-            array('getUploadPath', 'detectVersion', 'loadConfig')
-        );
-
-        return $plugin;
-    }
-
-    /**
      * Prepare the test directory and the plugin.
      *
      * @param string $subDir
      *
-     * @return Plugin
+     * @return ContaoEnvironmentInterface
      */
     protected function clearTest($subDir = '')
     {
@@ -79,8 +65,15 @@ class GetContaoRootTest extends TestCase
         {
             $this->markTestIncomplete('Could not change to temp dir. Test incomplete!');
         }
+    }
 
-        return $this->mockPlugin($this->testRoot . $subDir. DIRECTORY_SEPARATOR . 'files');
+    protected function determineRootFromPackage($package)
+    {
+        $factory    = new ContaoEnvironmentFactory();
+        $reflection = new \ReflectionMethod($factory, 'findRoot');
+        $reflection->setAccessible(true);
+
+        return $reflection->invoke($factory, $package);
     }
 
     /**
@@ -90,14 +83,12 @@ class GetContaoRootTest extends TestCase
      */
     public function testOverrideViaExtra()
     {
-        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
-
-        $plugin = $this->clearTest('/tmp/path');
+        $this->clearTest('/tmp/path');
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
         $package->setExtra(array('contao' => array('root' => 'tmp/path')));
 
-        $this->assertEquals($this->testRoot . '/tmp/path', $plugin->getContaoRoot($package));
+        $this->assertEquals($this->testRoot . '/tmp/path', $this->determineRootFromPackage($package));
     }
 
     /**
@@ -105,13 +96,11 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreAsSubModule()
     {
-        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
-
-        $plugin = $this->clearTest('/vendor/contao/core');
+        $this->clearTest('/vendor/contao/core');
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
 
-        $this->assertEquals($this->testRoot . '/vendor/contao/core', $plugin->getContaoRoot($package));
+        $this->assertEquals($this->testRoot . '/vendor/contao/core', $this->determineRootFromPackage($package));
     }
 
     /**
@@ -119,13 +108,11 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreIsRoot()
     {
-        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
-
-        $plugin = $this->clearTest();
+        $this->clearTest();
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
 
-        $this->assertEquals(dirname($this->testRoot), $plugin->getContaoRoot($package));
+        $this->assertEquals(dirname($this->testRoot), $this->determineRootFromPackage($package));
     }
 
     /**
@@ -133,13 +120,11 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreIsCwd()
     {
-        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
-
-        $plugin = $this->clearTest();
+        $this->clearTest();
         mkdir($this->testRoot . DIRECTORY_SEPARATOR . 'system/modules', 0777, true);
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
 
-        $this->assertEquals($this->testRoot, $plugin->getContaoRoot($package));
+        $this->assertEquals($this->testRoot, $this->determineRootFromPackage($package));
     }
 }
