@@ -13,25 +13,18 @@
 
 namespace ContaoCommunityAlliance\Composer\Plugin\Test\SymlinkInstaller;
 
-use Composer\Config;
-use ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\SymlinkInstaller;
 use ContaoCommunityAlliance\Composer\Plugin\Test\InstallCodeBase;
 
 class InstallCodeSymlinkTest
     extends InstallCodeBase
 {
     /**
-     * @return AbstractInstaller
+     * @return SymlinkInstaller
      */
     protected function mockInstaller()
     {
-        $installer = $this
-            ->getMock('\ContaoCommunityAlliance\Composer\Plugin\SymlinkInstaller', array('getUploadPath'), array($this->io, $this->composer, $this->plugin));
-
-        $installer
-            ->expects($this->any())
-            ->method('getUploadPath')
-            ->will($this->returnValue($this->uploadDir));
+        $installer = new SymlinkInstaller($this->io, $this->composer, $this->environment);
 
         return $installer;
     }

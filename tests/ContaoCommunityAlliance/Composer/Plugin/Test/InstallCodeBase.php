@@ -21,8 +21,8 @@ use Composer\Package\CompletePackage;
 use Composer\Package\RootPackage;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
-use ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller;
-use ContaoCommunityAlliance\Composer\Plugin\Plugin;
+use ContaoCommunityAlliance\Composer\Plugin\Environment\Contao3Environment;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller;
 
 abstract class InstallCodeBase extends TestCase
 {
@@ -56,8 +56,8 @@ abstract class InstallCodeBase extends TestCase
     /** @var string */
     protected $uploadDir;
 
-    /** @var Plugin */
-    protected $plugin;
+    /** @var Contao3Environment */
+    protected $environment;
 
     protected function setUp()
     {
@@ -92,13 +92,13 @@ abstract class InstallCodeBase extends TestCase
 
         $this->uploadDir = 'upload';
 
-        $this->plugin = $this->getMock('\ContaoCommunityAlliance\Composer\Plugin\Plugin');
-        $this->plugin
-            ->expects($this->any())
-            ->method('getContaoRoot')
-            ->will($this->returnValue($this->rootDir));
+        $this->environment = $this->getMock(
+            '\ContaoCommunityAlliance\Composer\Plugin\Environment\Contao3Environment',
+            array('getUploadPath'),
+            array($this->rootDir)
+        );
 
-        $this->plugin
+        $this->environment
             ->expects($this->any())
             ->method('getUploadPath')
             ->will($this->returnValue($this->uploadDir));

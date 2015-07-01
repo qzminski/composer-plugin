@@ -36,6 +36,8 @@ class ExtractKeyFromConfigFileTest extends TestCase
 
     public function testDefault()
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $this->runWith('default-contao-3.2.php', 'websiteTitle', 'Contao Open Source CMS');
         $this->runWith('default-contao-3.2.php', 'characterSet', 'utf-8');
         $this->runWith('default-contao-3.2.php', 'adminEmail', '');

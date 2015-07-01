@@ -14,7 +14,7 @@
 namespace ContaoCommunityAlliance\Composer\Plugin\Test\ConfigManipulator;
 
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
-use ContaoCommunityAlliance\Composer\Plugin\ConfigManipulator;
+use ContaoCommunityAlliance\Composer\Plugin\Dependency\ConfigManipulator;
 
 class RestoreNeededConfigKeysTest extends TestCase
 {

@@ -73,6 +73,8 @@ class DetectVersionTest extends TestCase
      */
     protected function runWith($plugin, $systemDir, $configDir, $expectVersion, $expectBuild)
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $detectVersion = new \ReflectionMethod($plugin, 'detectVersion');
         $detectVersion->setAccessible(true);
 

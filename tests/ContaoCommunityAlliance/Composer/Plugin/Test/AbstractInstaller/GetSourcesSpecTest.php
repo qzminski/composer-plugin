@@ -17,17 +17,12 @@ use Composer\Composer;
 use Composer\Config;
 use Composer\IO\NullIO;
 use Composer\Package\RootPackage;
-use ContaoCommunityAlliance\Composer\Plugin\Plugin;
+use ContaoCommunityAlliance\Composer\Plugin\Environment\Contao3Environment;
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
-use ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller;
 
 class GetSourcesSpecTest extends TestCase
 {
-    /**
-     * @var Plugin
-     */
-    protected $plugin;
-
     /**
      * @var AbstractInstaller
      */
@@ -40,13 +35,6 @@ class GetSourcesSpecTest extends TestCase
 
     public function setUp()
     {
-        $this->plugin = $this->getMock('\ContaoCommunityAlliance\Composer\Plugin\Plugin');
-
-        $this->plugin
-            ->expects($this->any())
-            ->method('getContaoRoot')
-            ->will($this->returnValue('CONTAO_ROOT'));
-
         $package = new RootPackage('test/me', '0.8.15', '0.8.15.0');
         $package->setType(AbstractInstaller::MODULE_TYPE);
 
@@ -55,8 +43,8 @@ class GetSourcesSpecTest extends TestCase
         $this->composer->setPackage($package);
 
         $this->installerStub = $this->getMockForAbstractClass(
-            '\ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller',
-            array(new NullIO(), $this->composer, $this->plugin)
+            '\ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller',
+            array(new NullIO(), $this->composer, new Contao3Environment('CONTAO_ROOT'))
         );
     }
 

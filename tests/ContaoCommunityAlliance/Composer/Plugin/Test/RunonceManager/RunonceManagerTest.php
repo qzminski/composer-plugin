@@ -16,7 +16,7 @@ namespace ContaoCommunityAlliance\Composer\Plugin\Test\RunonceManager;
 use Composer\IO\IOInterface;
 use Composer\Package\CompletePackage;
 use Composer\Util\Filesystem;
-use ContaoCommunityAlliance\Composer\Plugin\RunonceManager;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\RunonceManager;
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
 
 class RunonceManagerTest

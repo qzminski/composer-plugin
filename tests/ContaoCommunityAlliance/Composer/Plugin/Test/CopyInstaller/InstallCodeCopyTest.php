@@ -14,24 +14,18 @@
 namespace ContaoCommunityAlliance\Composer\Plugin\Test\CopyInstaller;
 
 use Composer\Config;
-use ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\CopyInstaller;
 use ContaoCommunityAlliance\Composer\Plugin\Test\InstallCodeBase;
 
 class InstallCodeCopyTest
     extends InstallCodeBase
 {
     /**
-     * @return AbstractInstaller
+     * @return CopyInstaller
      */
     protected function mockInstaller()
     {
-        $installer = $this
-            ->getMock('\ContaoCommunityAlliance\Composer\Plugin\CopyInstaller', array('getUploadPath'), array($this->io, $this->composer, $this->plugin));
-
-        $installer
-            ->expects($this->any())
-            ->method('getUploadPath')
-            ->will($this->returnValue($this->uploadDir));
+        $installer = new CopyInstaller($this->io, $this->composer, $this->environment);
 
         return $installer;
     }

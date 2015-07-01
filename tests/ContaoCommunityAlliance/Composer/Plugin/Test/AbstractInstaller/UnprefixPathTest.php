@@ -14,7 +14,7 @@
 namespace ContaoCommunityAlliance\Composer\Plugin\Test\AbstractInstaller;
 
 use ContaoCommunityAlliance\Composer\Plugin\Test\TestCase;
-use ContaoCommunityAlliance\Composer\Plugin\AbstractInstaller;
+use ContaoCommunityAlliance\Composer\Plugin\Installer\AbstractInstaller;
 
 class UnprefixPathTest extends TestCase
 {

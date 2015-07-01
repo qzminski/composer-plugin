@@ -90,6 +90,8 @@ class GetContaoRootTest extends TestCase
      */
     public function testOverrideViaExtra()
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $plugin = $this->clearTest('/tmp/path');
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
@@ -103,6 +105,8 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreAsSubModule()
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $plugin = $this->clearTest('/vendor/contao/core');
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
@@ -115,6 +119,8 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreIsRoot()
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $plugin = $this->clearTest();
 
         $package = new RootPackage('test/package', '1.0.0.0', '1.0.0');
@@ -127,6 +133,8 @@ class GetContaoRootTest extends TestCase
      */
     public function testCoreIsCwd()
     {
+        $this->markTestIncomplete('Needs to be rewritten as Environment test.');
+
         $plugin = $this->clearTest();
         mkdir($this->testRoot . DIRECTORY_SEPARATOR . 'system/modules', 0777, true);
 
